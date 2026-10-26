@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CMRIT MUN 2027 | CMR Institute of Technology, Hyderabad</title>
+<meta name="description" content="CMRIT MUN 2027, the Model United Nations conference hosted by CMR Institute of Technology, Hyderabad, Telangana.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="progress"></div>
+
+<header id="nav">
+  <a href="#home" class="brand">CMRIT <b>MUN</b></a>
+  <button id="burger" aria-label="Menu"><span></span><span></span></button>
+  <nav id="menu">
+    <a href="#about">About</a><a href="#committees">Committees</a><a href="#schedule">Schedule</a>
+    <a href="#team">Secretariat</a><a href="#faq">FAQ</a><a href="#register" class="btn sm">Register</a>
+  </nav>
+</header>
+
+<section id="home" class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-in">
+    <div class="crest">
+      <svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="70"/><circle cx="100" cy="100" r="48"/><circle cx="100" cy="100" r="26"/><path d="M100 30V170M30 100H170M51 51L149 149M149 51L51 149"/></svg>
+    </div>
+    <p class="kicker">CMR Institute of Technology presents</p>
+    <h1><span>CMRIT</span> <span class="gold">MUN</span></h1>
+    <p class="year">2 0 2 7</p>
+    <p class="tag">Where delegates become diplomats.</p>
+    <div class="countdown" id="countdown">
+      <div><b id="d">00</b><small>Days</small></div><div><b id="h">00</b><small>Hours</small></div>
+      <div><b id="m">00</b><small>Minutes</small></div><div><b id="s">00</b><small>Seconds</small></div>
+    </div>
+    <div class="cta"><a href="#register" class="btn">Secure your seat</a><a href="#committees" class="btn ghost">Explore committees</a></div>
+  </div>
+  <div class="ribbon"><span>COMING SOON</span></div>
+</section>
+
+<div class="marquee"><div>
+  <span>Diplomacy</span><span>Debate</span><span>Resolution</span><span>Leadership</span><span>Negotiation</span><span>Diplomacy</span><span>Debate</span><span>Resolution</span><span>Leadership</span><span>Negotiation</span>
+</div></div>
+
+<section id="about" class="sec">
+  <div class="wrap two">
+    <div>
+      <h2>A chamber built for bold ideas</h2>
+      <p>CMRIT MUN is the flagship Model United Nations conference of CMR Institute of Technology, Hyderabad. Over several days, students from colleges across Telangana and beyond step into the shoes of ambassadors, argue world affairs, and draft resolutions that actually have to survive a vote.</p>
+      <p>Whether this is your first placard or your fiftieth, you will leave sharper, braver and better connected.</p>
+    </div>
+    <div class="stats">
+      <div><b>600+</b><small>Delegates</small></div>
+      <div><b>6</b><small>Committees</small></div>
+      <div><b>40+</b><small>Institutions</small></div>
+      <div><b>3</b><small>Days</small></div>
+    </div>
+  </div>
+</section>
+
+<section id="committees" class="sec dark">
+  <div class="wrap">
+    <h2 class="center">Committees</h2>
+    <p class="sub center">Tap or hover a card to read the agenda.</p>
+    <div class="grid" id="cgrid"></div>
+  </div>
+</section>
+
+<section id="schedule" class="sec">
+  <div class="wrap">
+    <h2 class="center">Schedule</h2>
+    <div class="tabs" id="tabs"><button class="on" data-t="0">Day 1</button><button data-t="1">Day 2</button><button data-t="2">Day 3</button></div>
+    <ul class="timeline" id="timeline"></ul>
+    <p class="note center">Dates and timings are placeholders until the official announcement.</p>
+  </div>
+</section>
+
+<section id="team" class="sec dark">
+  <div class="wrap">
+    <h2 class="center">The Secretariat</h2>
+    <div class="grid team">
+      <div class="person"><i>SG</i><h4>Secretary General</h4><p>Name to be announced</p></div>
+      <div class="person"><i>DS</i><h4>Director General</h4><p>Name to be announced</p></div>
+      <div class="person"><i>US</i><h4>Under Secretary General</h4><p>Name to be announced</p></div>
+      <div class="person"><i>FC</i><h4>Faculty Convener</h4><p>CMR Institute of Technology</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="register" class="sec">
+  <div class="wrap narrow">
+    <h2 class="center">Register your interest</h2>
+    <p class="sub center">Be first in line when delegate registrations open.</p>
+    <form id="form" novalidate>
+      <label>Full name<input name="name" required placeholder="Your name"></label>
+      <label>Email<input name="email" type="email" required placeholder="you@college.edu"></label>
+      <label>Institution<input name="inst" required placeholder="College or school"></label>
+      <label>Preferred committee<select name="com" id="comSel"></select></label>
+      <label>Experience
+        <select name="exp"><option>First timer</option><option>1 to 3 conferences</option><option>4+ conferences</option></select></label>
+      <button class="btn" type="submit">Notify me</button>
+      <p id="msg" role="status"></p>
+    </form>
+  </div>
+</section>
+
+<section id="faq" class="sec dark">
+  <div class="wrap narrow">
+    <h2 class="center">Questions, answered</h2>
+    <div class="faq">
+      <details><summary>Who can attend?</summary><p>Students from any school or college. Delegations and individual delegates are both welcome.</p></details>
+      <details><summary>Do I need prior experience?</summary><p>No. Beginner friendly committees and pre-conference training are planned for first timers.</p></details>
+      <details><summary>Where is the conference?</summary><p>On the CMR Institute of Technology campus, Kandlakoya, Medchal, Hyderabad, Telangana.</p></details>
+      <details><summary>When do registrations open?</summary><p>Soon. Follow @cmritmun on Instagram or leave your details above.</p></details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <h3>CMRIT <span class="gold">MUN</span> 2027</h3>
+  <p>CMR Institute of Technology · Hyderabad, Telangana</p>
+  <p class="links"><a href="https://instagram.com/cmritmun" target="_blank" rel="noopener">@cmritmun</a><a href="https://instagram.com/cmrittelangana" target="_blank" rel="noopener">@cmrittelangana</a></p>
+  <small>Prototype build. Not an official registration page.</small>
+</footer>
+<button id="top" aria-label="Back to top">↑</button>
+<script src="script.js"></script>
+</body>
+</html>
