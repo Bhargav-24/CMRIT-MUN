@@ -101,7 +101,7 @@ nav a:hover { color: var(--gold-light); }
 }
 .hero-in {
   position: relative; z-index: 2; display: grid; align-items: center;
-  grid-template-columns: minmax(0, 1fr) 150px; gap: 2rem;
+  grid-template-columns: minmax(0, 1fr) 184px; gap: 2rem;
   width: min(1120px, 88vw); margin: 0 auto;
 }
 .hero-copy { max-width: 860px; }
@@ -122,11 +122,11 @@ h1 em, h2 em { color: var(--gold-light); font-family: 'Cinzel', serif; font-weig
 .hero-meta { display: flex; align-items: center; gap: .8rem; margin: 1.6rem 0 2rem; color: rgba(255, 250, 240, .58); font-size: .68rem; letter-spacing: .15em; }
 .hero-meta i { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); }
 .cta { display: flex; flex-wrap: wrap; gap: .8rem; }
-.orbit-mark { position: relative; width: 132px; height: 132px; justify-self: center; }
+.orbit-mark { position: relative; width: 174px; height: 174px; justify-self: center; }
 .orbit-mark svg { width: 100%; height: 100%; overflow: visible; animation: orbit 32s linear infinite; }
 .orbit-mark circle { fill: none; stroke: rgba(240, 206, 120, .4); stroke-width: .8; }
-.orbit-mark text { fill: var(--gold-light); font: 6.7px 'Outfit', sans-serif; letter-spacing: 2px; }
-.orbit-mark > span { position: absolute; inset: 0; display: grid; place-items: center; color: var(--paper-bright); font: 500 1.35rem 'Cinzel', serif; }
+.orbit-mark text { fill: var(--gold-light); font: 7.2px 'Outfit', sans-serif; letter-spacing: 1.5px; }
+.orbit-mark > span { position: absolute; inset: 0; display: grid; place-items: center; color: var(--paper-bright); font: 500 1.6rem 'Cinzel', serif; }
 @keyframes orbit { to { transform: rotate(360deg); } }
 .hero-gallery {
   position: relative; z-index: 2; display: grid; grid-template-columns: repeat(3, 1fr);
@@ -180,6 +180,10 @@ h2 em { color: var(--forest-light); }
 .about-note p { margin-top: .8rem; color: rgba(255, 250, 240, .72); font-size: .9rem; }
 
 .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+#cgrid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+#cgrid .card { grid-column: span 2; }
+#cgrid .card:nth-child(4) { grid-column: 2 / span 2; }
+#cgrid .card:nth-child(5) { grid-column: 4 / span 2; }
 .card {
   position: relative; display: block; min-height: 258px; padding: 0; overflow: hidden;
   border: 1px solid rgba(199, 150, 50, .36); border-radius: 4px;
@@ -258,8 +262,8 @@ footer small { color: rgba(255, 250, 240, .42); font-size: .72rem; }
   nav a { padding: .75rem .4rem; font-size: 1rem; }
   nav .btn { align-self: flex-start; margin-top: .5rem; padding-inline: 1rem; }
   .hero { min-height: 770px; padding-top: 140px; }
-  .hero-in { grid-template-columns: 1fr 96px; gap: 1rem; }
-  .orbit-mark { width: 94px; height: 94px; }
+  .hero-in { grid-template-columns: 1fr 120px; gap: 1rem; }
+  .orbit-mark { width: 116px; height: 116px; }
   .hero-gallery { margin-top: 4rem; }
   .gallery-card { min-height: 170px; padding: 1rem; }
   .two { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -271,8 +275,8 @@ footer small { color: rgba(255, 250, 240, .42); font-size: .72rem; }
   .hero-in, .hero-gallery, .wrap { width: 88vw; }
   .hero-in { display: block; }
   h1 { font-size: clamp(3rem, 12vw, 4.4rem); }
-  .orbit-mark { position: absolute; top: -53px; right: 0; width: 72px; height: 72px; }
-  .orbit-mark > span { font-size: .95rem; }
+  .orbit-mark { position: absolute; top: -58px; right: 0; width: 94px; height: 94px; }
+  .orbit-mark > span { font-size: 1.05rem; }
   .hero-meta { flex-wrap: wrap; font-size: .59rem; }
   .hero-gallery { gap: .55rem; margin-top: 3.4rem; margin-bottom: -124px; }
   .gallery-card { min-height: 135px; padding: .7rem; }
@@ -284,6 +288,9 @@ footer small { color: rgba(255, 250, 240, .42); font-size: .72rem; }
   .marquee span { gap: .55rem; font-size: .62rem; letter-spacing: .08em; }
   .sec { padding: 5rem 0; }
   .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65rem; }
+  #cgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #cgrid .card, #cgrid .card:nth-child(4), #cgrid .card:nth-child(5) { grid-column: auto; }
+  #cgrid .card:last-child { grid-column: 1 / -1; width: calc(50% - .325rem); justify-self: center; }
   .card { min-height: 240px; }
   .card > span { padding: 1rem; }
   .card .ic { font-size: 1.55rem; }

@@ -2,20 +2,18 @@ const $=(s,c=document)=>c.querySelector(s),$$=(s,c=document)=>[...c.querySelecto
 
 // Data
 const committees=[
- {n:'UNGA',f:'United Nations General Assembly',d:'A forum where all UN member states debate global issues and propose cooperative solutions.',a:'How should the international community govern artificial intelligence across borders?'},
- {n:'UNSC',f:'Security Council',d:'This council addresses threats to international peace and considers collective responses to conflict.',a:'Building lasting peace while responding to a fast-changing regional conflict.'},
- {n:'UNHRC',f:'Human Rights Council',d:'Delegates discuss human rights challenges and ways to protect fundamental freedoms worldwide.',a:'Protecting privacy and human rights in an increasingly connected world.'},
+ {n:'UNHRC',f:'United Nations Human Rights Council',d:'Delegates discuss human rights challenges and ways to protect fundamental freedoms worldwide.',a:'Protecting privacy and human rights in an increasingly connected world.'},
+ {n:'DISEC',f:'Disarmament and International Security Committee',d:'The UN General Assembly committee where countries discuss disarmament, arms control, and international security.',a:'Building international cooperation to reduce the risks of autonomous weapons.'},
  {n:'AIPPM',f:'All India Political Parties Meet',d:'Indian political parties debate national policy, representing different viewpoints and constituencies.',a:'Balancing urban growth, public services, and the needs of a changing India.'},
- {n:'UNEP',f:'UN Environment Programme',d:'This committee focuses on international cooperation to address environmental challenges.',a:'Making climate adaptation more accessible to vulnerable communities.'},
- {n:'WHO',f:'World Health Organization',d:'Delegates work together on global public health challenges and equitable access to care.',a:'Working towards fair access to essential healthcare and medicine.'},
- {n:'Crisis',f:'Joint Crisis Committee',d:'A fast-paced simulation where delegates respond to unfolding events and shape the outcome together.',a:'A fast-moving, collaborative scenario where every decision changes the next.'}];
+ {n:'CSW',f:'United Nations Commission on the Status of Women',d:'An international body focused on gender equality, women\'s rights, and the empowerment of women and girls.',a:'Strengthening access to education and economic opportunity for women and girls.'},
+ {n:'IP',f:'International Press',d:'The conference media team reports on committee discussions through articles, interviews, and press coverage.',a:'Covering committee sessions, interviewing delegates, and reporting on the ideas shaping the conference.',label:'ILLUSTRATIVE PRESS FOCUS'}];
 const days=[
  ['Meet your fellow delegates and get oriented','Opening ceremony and first committee session','Learn the rules of debate together','Begin building your bloc and sharing ideas'],
  ['Return to committee with fresh perspectives','Negotiate, collaborate, and write working papers','Respond to new developments in committee','Bring draft resolutions forward for discussion'],
  ['Refine proposals through final debate','Present resolutions and vote as a committee','Close the conference together','Celebrate the ideas and voices in the room']];
 
 // Committee cards + select
-$('#cgrid').innerHTML=committees.map(c=>`<button class="card" type="button" aria-pressed="false" aria-label="${c.n}: ${c.f}. Reveal illustrative agenda and committee description"><span class="front"><span class="ic">${c.n}</span><span class="card-name">${c.f}</span><small>View illustrative agenda <span aria-hidden="true">↗</span></small></span><span class="back"><span class="agenda-label">WHAT THIS COMMITTEE DOES</span><p class="committee-description">${c.d}</p><span class="agenda-label">ILLUSTRATIVE AGENDA</span><span>${c.a}</span><small>Tap to return</small></span></button>`).join('');
+$('#cgrid').innerHTML=committees.map(c=>`<button class="card" type="button" aria-pressed="false" aria-label="${c.n}: ${c.f}. Reveal illustrative details and committee description"><span class="front"><span class="ic">${c.n}</span><span class="card-name">${c.f}</span><small>View details <span aria-hidden="true">↗</span></small></span><span class="back"><span class="agenda-label">WHAT THIS COMMITTEE DOES</span><p class="committee-description">${c.d}</p><span class="agenda-label">${c.label||'ILLUSTRATIVE AGENDA'}</span><span>${c.a}</span><small>Tap to return</small></span></button>`).join('');
 $('#comSel').innerHTML=committees.map(c=>`<option>${c.n}</option>`).join('')+'<option>No preference</option>';
 $$('.card').forEach(c=>{c.onclick=()=>{const flipped=c.classList.toggle('flip');c.setAttribute('aria-pressed',String(flipped))}});
 
@@ -56,7 +54,47 @@ if('IntersectionObserver' in window){
 // Nav
 const nav=$('#nav'),burger=$('#burger'),menu=$('#menu');
 burger.onclick=()=>{burger.classList.toggle('open');menu.classList.toggle('open')};
-$$('#menu a').forEach(a=>a.onclick=()=>{burger.classList.remove('open');menu.classList.remove('open')});
+let pendingReveal=null,revealFallback=null,revealAnimation=null;
+function replaySectionReveal(section){
+ if(revealAnimation)revealAnimation.cancel();
+ section.classList.add('in-view');
+ revealAnimation=section.animate(
+  [{opacity:0,transform:'translateY(28px)'},{opacity:1,transform:'translateY(0)'}],
+  {duration:650,easing:'cubic-bezier(.2, .75, .25, 1)'}
+ );
+}
+document.addEventListener('scrollend',()=>{
+ if(!pendingReveal)return;
+ const section=pendingReveal;
+ pendingReveal=null;
+ clearTimeout(revealFallback);
+ replaySectionReveal(section);
+});
+$$('#menu a').forEach(a=>a.onclick=e=>{
+ burger.classList.remove('open');menu.classList.remove('open');
+ const href=a.getAttribute('href'),target=href&&href.startsWith('#')?$(href):null;
+ if(!target)return;
+ e.preventDefault();
+ const section=target.matches('.sec')?target.querySelector(':scope > .wrap'):target.querySelector(':scope > .hero-in');
+ if(section){
+  const alreadyAligned=Math.abs(target.getBoundingClientRect().top-parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop))<2;
+  pendingReveal=null;
+  clearTimeout(revealFallback);
+  if(alreadyAligned){
+   replaySectionReveal(section);
+  }else{
+  pendingReveal=section;
+   revealFallback=setTimeout(()=>{
+    if(pendingReveal===section){
+     pendingReveal=null;
+     replaySectionReveal(section);
+    }
+   },1500);
+   target.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  if(location.hash!==href)history.pushState(null,'',href);
+ }
+});
 addEventListener('keydown',e=>{if(e.key==='Escape'){burger.classList.remove('open');menu.classList.remove('open')}});
 
 // Scroll effects
